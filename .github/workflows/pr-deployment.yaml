@@ -71,6 +71,7 @@ jobs:
         run: |
           # deployment logic goes here
           sleep 2
+          exit
 
       - name: set deployment status to success
         id: successful_deployment
