@@ -64,10 +64,7 @@ jobs:
       - name: deploy the pull request
         run: |
           # deployment logic goes here
-          sleep 10
-
-          # instead we randomly succeed or fail the deployment
-          exit 1
+          sleep 2
 
       - name: set deployment status to success
         id: successful_deployment
