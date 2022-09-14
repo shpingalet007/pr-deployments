@@ -61,6 +61,12 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
+      - name: set pull request label to in progress
+        uses: andymckay/labeler@master
+        with:
+          add-labels: "deploy state: ⌛️ in progress"
+          remove-labels: "deploy state: ✅ done, deploy state: 💀 failed"
+
       - name: deploy the pull request
         run: |
           # deployment logic goes here
@@ -80,6 +86,19 @@ jobs:
           state: success
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: set pull request label to done
+        uses: andymckay/labeler@master
+        with:
+          add-labels: "deploy state: ✅ done"
+          remove-labels: "deploy state: ⌛️ in progress, deploy state: 💀 failed"
+          
+      - name: set pull request label to failed
+        uses: andymckay/labeler@master
+        if: failure()
+        with:
+          add-labels: "deploy state: 💀 failed"
+          remove-labels: "deploy state: ⌛️ in progress, deploy state: ✅ done"
 
       - name: set deployment status to failure
         id: failed_deployment
