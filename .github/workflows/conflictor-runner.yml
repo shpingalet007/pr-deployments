@@ -12,12 +12,8 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
-      - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16
       - name: Start conflict analyzer
-        uses: shpingalet007/conflictor@v0.1.3.010
+        uses: shpingalet007/conflictor@v0.1.3.011
         with:
           repository: ${{ github.event.repository.full_name }}
           deploy-label: 'deploy state: ✅ done'
