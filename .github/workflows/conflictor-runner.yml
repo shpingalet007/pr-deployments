@@ -8,4 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Conflictor runner
-        uses: shpingalet007/conflictor@v0.1.3
+        uses: shpingalet007/conflictor@v0.1.3.001
+        with:
+          repository: ${{ github.event.repository.full_name }}
+          deploy-label: 'deploy state: ✅ done'
