@@ -1,4 +1,4 @@
-name: pr-deployment
+name: Conflictor runner
 
 on:
   workflow_dispatch:
