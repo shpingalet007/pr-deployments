@@ -1,4 +1,4 @@
-name: pr-deployment
+name: deploy-dev
 
 on:
   issue_comment:
@@ -87,7 +87,7 @@ jobs:
         with:
           add-labels: "deploy state: ✅ done"
           remove-labels: "deploy state: 💀 failed"
-          
+
       - name: set pull request label to failed
         uses: andymckay/labeler@master
         if: failure()
