@@ -62,20 +62,20 @@ jobs:
           add-labels: "deploy state: 💀 failed"
           remove-labels: "deploy state: ✅ done"
 
-        - name: update deployment status (success)
-          if: success()
-          uses: chrnorm/deployment-status@v2
-          with:
-            token: '${{ github.token }}'
-            environment-url: ${{ steps.deployment.outputs.environment_url }}
-            deployment-id: ${{ steps.deployment.outputs.deployment_id }}
-            state: 'success'
+      - name: update deployment status (success)
+        if: success()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ github.token }}'
+          environment-url: ${{ steps.deployment.outputs.environment_url }}
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+          state: 'success'
 
-        - name: update deployment status (failure)
-          if: failure()
-          uses: chrnorm/deployment-status@v2
-          with:
-            token: '${{ github.token }}'
-            environment-url: ${{ steps.deployment.outputs.environment_url }}
-            deployment-id: ${{ steps.deployment.outputs.deployment_id }}
-            state: 'failure'
+      - name: update deployment status (failure)
+        if: failure()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ github.token }}'
+          environment-url: ${{ steps.deployment.outputs.environment_url }}
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+          state: 'failure'
