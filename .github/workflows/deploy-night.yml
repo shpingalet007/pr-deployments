@@ -36,7 +36,8 @@ jobs:
           environment_url: https://night.example.com
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: in_progress
-          mediaType: '{"previews": ["flash", "ant-man"]}'
+          mediaType: |
+            raw: application/vnd.github.flash-preview+json
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
@@ -55,7 +56,8 @@ jobs:
           environment: night
           environment_url: https://night.example.com
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          mediaType: '{"previews": ["ant-man"]}'
+          mediaType: |
+            raw: application/vnd.github.flash-preview+json
           state: success
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
@@ -71,7 +73,8 @@ jobs:
           environment: night
           environment_url: https://night.example.com
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          mediaType: '{"previews": ["ant-man"]}'
+          mediaType: |
+            raw: application/vnd.github.flash-preview+json
           state: failure
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
