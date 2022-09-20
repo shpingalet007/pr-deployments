@@ -28,6 +28,7 @@ jobs:
         uses: chrnorm/deployment-action@v2
         id: deployment
         with:
+          ref: '${{ github.sha }}'
           token: '${{ github.token }}'
           environment-url: http://pre.example.net
           environment: dev
@@ -65,6 +66,7 @@ jobs:
         if: success()
         uses: chrnorm/deployment-status@v2
         with:
+          ref: '${{ github.sha }}'
           token: '${{ github.token }}'
           environment-url: ${{ steps.deployment.outputs.environment_url }}
           deployment-id: ${{ steps.deployment.outputs.deployment_id }}
@@ -74,6 +76,7 @@ jobs:
         if: failure()
         uses: chrnorm/deployment-status@v2
         with:
+          ref: '${{ github.sha }}'
           token: '${{ github.token }}'
           environment-url: ${{ steps.deployment.outputs.environment_url }}
           deployment-id: ${{ steps.deployment.outputs.deployment_id }}
