@@ -45,8 +45,7 @@ jobs:
       - name: deploy the pull request
         run: |
           # deployment logic goes here
-          sleep 2
-          exit 1
+          sleep 10
 
 
       - name: set pull request label to done
