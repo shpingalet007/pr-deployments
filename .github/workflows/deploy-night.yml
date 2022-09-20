@@ -6,8 +6,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    needs: deploy-check
-    if: needs.deploy-check.outputs.triggered == 'true'
     steps:
       - name: checkout git repository
         uses: actions/checkout@v2
