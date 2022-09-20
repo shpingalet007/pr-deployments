@@ -57,7 +57,8 @@ jobs:
           environment_url: https://example.com
           log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           state: in_progress
-          mediaType: '{"previews": ["flash", "ant-man"]}'
+          mediaType: |
+            previews: ["flash", "ant-man"]
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
