@@ -9,6 +9,12 @@ jobs:
     needs: deploy-check
     if: needs.deploy-check.outputs.triggered == 'true'
     steps:
+      - name: checkout git repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
       - name: create deployment
         id: create_deployment
         uses: octokit/request-action@v2.x
