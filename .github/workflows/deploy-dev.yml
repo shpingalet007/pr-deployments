@@ -24,15 +24,6 @@ jobs:
     needs: deploy-check
     if: needs.deploy-check.outputs.triggered == 'true'
     steps:
-      - name: create deployment
-        uses: chrnorm/deployment-action@v2
-        id: deployment
-        with:
-          ref: '${{ github.sha }}'
-          token: '${{ github.token }}'
-          environment-url: http://pre.example.net
-          environment: dev
-
       - name: get pull request ref
         id: get_pull_request_ref
         uses: octokit/request-action@v2.x
@@ -42,6 +33,15 @@ jobs:
           issue_id: ${{ github.event.issue.number }}
         env:
           GITHUB_TOKEN: "${{ github.token }}"
+
+      - name: create deployment
+        uses: chrnorm/deployment-action@v2
+        id: deployment
+        with:
+          ref: '${{ fromJson(steps.get_pull_request_ref.outputs.data).head.ref }}'
+          token: '${{ github.token }}'
+          environment-url: http://pre.example.net
+          environment: dev
 
       - name: deploy the pull request
         run: |
@@ -66,7 +66,7 @@ jobs:
         if: success()
         uses: chrnorm/deployment-status@v2
         with:
-          ref: '${{ github.sha }}'
+          ref: '${{ fromJson(steps.get_pull_request_ref.outputs.data).head.ref }}'
           token: '${{ github.token }}'
           environment-url: ${{ steps.deployment.outputs.environment_url }}
           deployment-id: ${{ steps.deployment.outputs.deployment_id }}
@@ -76,7 +76,7 @@ jobs:
         if: failure()
         uses: chrnorm/deployment-status@v2
         with:
-          ref: '${{ github.sha }}'
+          ref: '${{ fromJson(steps.get_pull_request_ref.outputs.data).head.ref }}'
           token: '${{ github.token }}'
           environment-url: ${{ steps.deployment.outputs.environment_url }}
           deployment-id: ${{ steps.deployment.outputs.deployment_id }}
