@@ -12,6 +12,11 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
+      - name: Prepare Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
       - name: Start conflict analyzer
         uses: shpingalet007/conflictor@workflows
         with:
