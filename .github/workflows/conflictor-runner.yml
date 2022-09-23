@@ -10,6 +10,7 @@ jobs:
       - name: Checkout git repository
         uses: actions/checkout@v2
         with:
+          submodules: recursive
           ref: master
           fetch-depth: 0
       - name: Start conflict analyzer
