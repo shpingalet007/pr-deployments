@@ -18,3 +18,4 @@ jobs:
           repository: ${{ github.event.repository.full_name }}
           deploy-label: 'deploy state: ✅ done'
           main-branch: 'master'
+          create-graph: 'true'
