@@ -1,4 +1,4 @@
-name: Conflictor runner
+name: analyze-conflicts
 
 on:
   workflow_dispatch:
