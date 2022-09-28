@@ -19,3 +19,4 @@ jobs:
           deploy-label: 'deploy state: ✅ done'
           main-branch: 'master'
           create-graph: 'true'
+          create-json: 'true'
