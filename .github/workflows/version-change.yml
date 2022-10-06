@@ -7,9 +7,44 @@ on:
     types: [created]
 
 jobs:
-  tests:
+  analyze-conflicts:
     runs-on: ubuntu-latest
     steps:
-      - name: Github context info
-        run: |
-          echo '${{ toJSON(github) }}'
+      - name: Get PR reference
+        id: get_pull_request_ref
+        uses: octokit/request-action@v2.x
+        with:
+          route: GET /repos/:repository/pulls/:issue_id
+          repository: ${{ github.repository }}
+          issue_id: ${{ github.event.issue.number }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Checkout PR branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ fromJson(steps.get_pull_request_ref.outputs.data).head.ref }}
+      - name: Get comment user email
+        id: user_email
+        uses: evvanErb/get-github-email-by-username-action@v1.25
+        with:
+          github-username: ${{ github.triggering_actor }}
+      - name: Handle version set change
+        id: trigger_version
+        uses: shpingalet007/pull-request-comment-trigger@comment-args
+        with:
+          trigger: /version set **
+          reaction: rocket
+          allow_arguments: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Change package version
+        uses: dmikey/package-json-version@0.0.2
+        with:
+          version: ${{ fromJson(steps.check.outputs.arguments)[0] }}
+      - uses: EndBug/add-and-commit@v9
+        with:
+          add: package.json
+          author_name: ${{ github.triggering_actor }}
+          author_email: ${{ steps.user_email.outputs.email }}
+          message: Set version to ${{ fromJson(steps.trigger_version.outputs.arguments)[0] }}
+          fetch: false
