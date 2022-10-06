@@ -1,0 +1,15 @@
+name: version-change
+
+on:
+  pull_request:
+    types: [opened]
+  issue_comment:
+    types: [created]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Github context info
+        run: |
+          echo '${{ toJSON(github) }}'
