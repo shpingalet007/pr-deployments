@@ -40,7 +40,7 @@ jobs:
       - name: Change package version
         uses: dmikey/package-json-version@v0.0.2
         with:
-          version: '${{ fromJson(steps.trigger_version.outputs.arguments[0] }}'
+          version: '${{ fromJson(steps.trigger_version.outputs.arguments)[0] }}'
       - uses: EndBug/add-and-commit@v9
         with:
           add: package.json
