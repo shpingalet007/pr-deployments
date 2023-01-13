@@ -31,7 +31,7 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: GET /repos/:repository/pulls/:issue_id
-          repository: ${{ github.repository }}
+          repository: ${{ github.event.issue.user.login }}/${{ github.repository.name }}
           issue_id: ${{ github.event.issue.number }}
         env:
           GITHUB_TOKEN: "${{ github.token }}"
