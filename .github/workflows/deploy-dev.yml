@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Echo github data for debug
-        run: echo ${{ toJson(github) }}
+        run: echo '${{ toJson(github) }}'
       - name: acknowledge deployment request to commenter
         id: check
         uses: khan/pull-request-comment-trigger@master
