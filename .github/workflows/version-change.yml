@@ -28,6 +28,7 @@ jobs:
         uses: evvanErb/get-github-email-by-username-action@v1.25
         with:
           github-username: '${{ github.triggering_actor }}'
+          token: '${{ secrets.GITHUB_TOKEN }}'
       - name: Handle version set change
         id: trigger_version
         uses: shpingalet007/pull-request-comment-trigger@comment-args
