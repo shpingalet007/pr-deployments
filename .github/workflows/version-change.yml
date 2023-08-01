@@ -32,7 +32,7 @@ jobs:
           token: '${{ secrets.GITHUB_TOKEN }}'
       - name: Handle version set change
         id: trigger_version
-        uses: shpingalet007/pull-request-comment-trigger@comment-args
+        uses: shpingalet007/pr-commands@comment-args-1278069752
         with:
           trigger: '/version set **'
           reaction: rocket
