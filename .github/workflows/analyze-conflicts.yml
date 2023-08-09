@@ -12,6 +12,8 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
+      - name: Check current folder
+        run: 'pwd'
       - name: Start conflict analyzer
         uses: shpingalet007/conflictor@main
         with:
