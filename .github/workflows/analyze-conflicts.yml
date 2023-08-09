@@ -13,7 +13,7 @@ jobs:
           ref: master
           fetch-depth: 0
       - name: Start conflict analyzer
-        uses: shpingalet007/conflictor
+        uses: shpingalet007/conflictor@main
         with:
           repository: ${{ github.event.repository.full_name }}
           deploy-label: 'deploy state: ✅ done'
