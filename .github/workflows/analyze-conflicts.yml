@@ -15,7 +15,7 @@ jobs:
       - name: Check current folder
         run: 'pwd'
       - name: Start conflict analyzer
-        uses: shpingalet007/conflictor@debug0908
+        uses: shpingalet007/conflictor@main
         with:
           repository: ${{ github.event.repository.full_name }}
           deploy-label: 'deploy state: ✅ done'
